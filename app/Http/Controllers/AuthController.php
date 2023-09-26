@@ -91,7 +91,8 @@ class AuthController extends Controller
             return response(['message' => 'ไม่พบผู้ใช้ที่ต้องการอัพเดต'], 404);
         }
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         return User::destroy($id);
     }
     public function login(Request $request)
@@ -141,7 +142,7 @@ class AuthController extends Controller
     public function index()
     {
         // แสดงข้อมูล ของ user ทีละ 10 ชือ่
-        $users = User::orderBy('id', 'desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(8);
         return response()->json($users);
     }
 }
