@@ -9,7 +9,6 @@ class PostkmController extends Controller
 {
     public function index()
     {
-
         // return Postkm::all();
         $postkms = Postkm::orderBy('id', 'desc')->paginate(5);
         return response()->json($postkms);
@@ -89,31 +88,28 @@ class PostkmController extends Controller
                 $creatorimg->move($destinationPath, $file_name);
                 $post['creatorimg'] = url('/') . '/image/avatar/' . $file_name;
                 $post->save();
-            } 
-            // else {
-            //     $post['creatorimg'] = url('/') . '/image/avatar/no_img.png';
-            //     $post->save();
-            // }
+            }
             if (!empty($titleimg = $request->file('titleimg'))) {
                 $destinationPath = public_path('/image/avatar');
                 $file_name = "titleimg" . time() . "." . $titleimg->getClientOriginalExtension();
                 $titleimg->move($destinationPath, $file_name);
                 $post['titleimg'] = url('/') . '/image/avatar/' . $file_name;
                 $post->save();
-            } 
-            // else {
-            //     $post['titleimg'] = url('/') . '/image/avatar/no_img.png';
-            //     $post->save();
-            // }
-
+            }
             return response($request, 201);
         } else {
             return response(['message' => 'การอัพเดตผิดพลาด !!!'], 404);
         }
-        
     }
     public function destroy($id)
     {
         return Postkm::destroy($id);
+    }
+
+    public function countPostkms()
+    {
+        // นับจำนวน users
+        $postkms = Postkm::query()->count();
+        return response()->json(['count' => $postkms]);
     }
 }

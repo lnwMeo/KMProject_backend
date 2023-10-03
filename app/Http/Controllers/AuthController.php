@@ -145,4 +145,12 @@ class AuthController extends Controller
         $users = User::orderBy('id', 'desc')->paginate(8);
         return response()->json($users);
     }
+
+
+    public function countUsers()
+    {
+        // นับจำนวน users
+        $users = User::query()->count();
+        return response()->json(['count' => $users]);
+    }
 }
