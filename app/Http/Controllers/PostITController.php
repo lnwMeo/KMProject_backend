@@ -10,7 +10,7 @@ class PostITController extends Controller
     public function index()
     {
         // return PostIT::all();
-        $postits = PostIT::orderBy('id', 'desc')->paginate(5);
+        $postits = PostIT::orderBy('id', 'desc')->paginate(4);
         return response()->json($postits);
     }
     public function show($id)
@@ -70,10 +70,11 @@ class PostITController extends Controller
                 $titleimgit->move($destinationPath, $file_name);
                 $postits['titleimgit'] = url('/') . '/image/avatar/' . $file_name;
                 $postits->save();
-            } else {
-                $postits['titleimgit'] = url('/') . '/image/avatar/no_img.png';
-                $postits->save();
-            }
+            } 
+            // else {
+            //     $postits['titleimgit'] = url('/') . '/image/avatar/no_img.png';
+            //     $postits->save();
+            // }
     
             return response($request, 201);
         }else{
@@ -93,4 +94,18 @@ class PostITController extends Controller
         return response()->json(['count' => $postits]);
     }
 
+    public function showpostprojact()
+    {
+        // return Postkm::all();
+        $postits = PostIT::orderBy('id', 'desc')->paginate(4);
+        return response()->json($postits);
+    }
+
+
+    public function showitviews()
+    {
+        // return Postkm::all();
+        $postits = PostIT::all();
+        return response()->json($postits);
+    }
 }

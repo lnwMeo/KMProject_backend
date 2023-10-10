@@ -11,7 +11,7 @@ class PostProjactController extends Controller
     public function index()
     {
         // return PostProjact::all();
-        $post_projacts = PostProjact::orderBy('id', 'desc')->paginate(5);
+        $post_projacts = PostProjact::orderBy('id', 'desc')->paginate(4);
         return response()->json($post_projacts);
     }
 
@@ -108,5 +108,19 @@ class PostProjactController extends Controller
     {
         $projact = PostProjact::query()->count();
         return response()->json(['count' => $projact]);
+    }
+
+    public function showpostprojact()
+    {
+        // return Postkm::all();
+         $projact = PostProjact::orderBy('id', 'desc')->paginate(4);
+        return response()->json($projact);
+    }
+
+    public function showproviews()
+    {
+        // return Postkm::all();
+        $projact = PostProjact::all();
+        return response()->json($projact);
     }
 }

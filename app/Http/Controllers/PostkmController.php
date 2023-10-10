@@ -10,7 +10,7 @@ class PostkmController extends Controller
     public function index()
     {
         // return Postkm::all();
-        $postkms = Postkm::orderBy('id', 'desc')->paginate(5);
+        $postkms = Postkm::orderBy('id', 'desc')->paginate(4);
         return response()->json($postkms);
     }
     public function show($id)
@@ -111,5 +111,18 @@ class PostkmController extends Controller
         // นับจำนวน users
         $postkms = Postkm::query()->count();
         return response()->json(['count' => $postkms]);
+    }
+
+    public function showfronend()
+    {
+        // return Postkm::all();
+        $postkms = Postkm::orderBy('id', 'desc')->paginate(4);
+        return response()->json($postkms);
+    }
+    public function showkmviews()
+    {
+        // return Postkm::all();
+        $postkms = Postkm::all();
+        return response()->json($postkms);
     }
 }
