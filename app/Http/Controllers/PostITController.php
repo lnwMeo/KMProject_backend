@@ -94,7 +94,7 @@ class PostITController extends Controller
         return response()->json(['count' => $postits]);
     }
 
-    public function showpostprojact()
+    public function showpostit()
     {
         // return Postkm::all();
         $postits = PostIT::orderBy('id', 'desc')->paginate(4);
@@ -105,7 +105,27 @@ class PostITController extends Controller
     public function showitviews()
     {
         // return Postkm::all();
-        $postits = PostIT::all();
+        // $postits = PostIT::all();
+        // return response()->json($postits);
+
+        $postits = PostIT::orderBy('id', 'desc')->paginate(15);
         return response()->json($postits);
+    }
+
+
+    public function showcontentit($id)
+    {
+        // return Postkm::all();
+        $postits = PostIT::find($id);
+        return response()->json($postits);
+    }
+
+    public function searchit($keyword)
+    {
+        return PostIT::where(function ($query) use ($keyword) {
+            $query->where('titlenameit', 'like', '%' . $keyword . '%');
+        })
+            ->orderBy('id', 'desc')
+            ->paginate(15);
     }
 }

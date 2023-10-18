@@ -113,14 +113,32 @@ class PostProjactController extends Controller
     public function showpostprojact()
     {
         // return Postkm::all();
-         $projact = PostProjact::orderBy('id', 'desc')->paginate(4);
+        $projact = PostProjact::orderBy('id', 'desc')->paginate(4);
         return response()->json($projact);
     }
 
     public function showproviews()
     {
         // return Postkm::all();
-        $projact = PostProjact::all();
+        $projact = PostProjact::orderBy('id', 'desc')->paginate(15);
         return response()->json($projact);
+    }
+
+    public function showcontentpro($id)
+    {
+        // return Postkm::all();
+        $projact = PostProjact::find($id);
+        return response()->json($projact);
+    }
+
+    public function searchpro($keyword)
+    {
+        return PostProjact::where(function ($query) use ($keyword) {
+            $query->where('titlenameprojact', 'like', '%' . $keyword . '%')
+                ->orWhere('creatornameprojact', 'like', '%' . $keyword . '%')
+                ->orWhere('yearcreatedprojact', 'like', '%' . $keyword . '%');
+        })
+            ->orderBy('id', 'desc')
+            ->paginate(15);
     }
 }

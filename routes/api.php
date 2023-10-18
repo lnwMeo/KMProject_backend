@@ -19,6 +19,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout']);
 });
+
+// หน้า dashbord admin
 Route::group(['prefix'], function () {
     Route::get('count-users', [AuthController::class, 'countUsers']);
     Route::get('count-postkms', [PostkmController::class, 'countPostkms']);
@@ -26,11 +28,25 @@ Route::group(['prefix'], function () {
     Route::get('count-postits', [PostITController::class, 'countPostits']);
     Route::get('count-page', [PageViewsController::class, 'countViews']);
 });
+//จบ หน้า dashbord admin
 
-Route::get('showpostkms',[PostkmController::class,'showfronend']);
-Route::get('showpostjacts',[PostProjactController::class,'showpostprojact']);
-Route::get('showpostit',[PostITController::class,'showpostprojact']);
+// show หน้า home
+Route::get('showpostkms', [PostkmController::class, 'showfronend']);
+Route::get('showpostjacts', [PostProjactController::class, 'showpostprojact']);
+Route::get('showpostit', [PostITController::class, 'showpostit']);
+//จบ show หน้า home
 
-Route::get('showkmv',[PostkmController::class,'showkmviews']);
-Route::get('showprov',[PostProjactController::class,'showproviews']);
-Route::get('showitv',[PostITController::class,'showitviews']);
+// หน้า showpost ITViews KMViews ProjectYViews
+Route::get('showkmv', [PostkmController::class, 'showkmviews']);
+Route::get('showprov', [PostProjactController::class, 'showproviews']);
+Route::get('showitv', [PostITController::class, 'showitviews']);
+
+Route::get('contentkmv/{id}', [PostkmController::class, 'showcontent']);
+Route::get('contentkmv/search/{keyword}', [PostkmController::class, 'search']);
+
+Route::get('contentpro/{id}', [PostProjactController::class, 'showcontentpro']);
+Route::get('contentpro/search/{keyword}', [PostProjactController::class, 'searchpro']);
+
+Route::get('contentit/{id}', [PostITController::class, 'showcontentit']);
+Route::get('contentit/search/{keyword}', [PostITController::class, 'searchit']);
+// จบ หน้า showpost ITViews KMViews ProjectYViews

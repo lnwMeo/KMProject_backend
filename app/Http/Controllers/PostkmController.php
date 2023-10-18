@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Postkm;
 use Illuminate\Http\Request;
 
+
 class PostkmController extends Controller
 {
     public function index()
@@ -106,23 +107,46 @@ class PostkmController extends Controller
         return Postkm::destroy($id);
     }
 
+    // fronend
     public function countPostkms()
     {
         // นับจำนวน users
         $postkms = Postkm::query()->count();
         return response()->json(['count' => $postkms]);
     }
-
+    // show หน้า HOME
     public function showfronend()
     {
         // return Postkm::all();
         $postkms = Postkm::orderBy('id', 'desc')->paginate(4);
         return response()->json($postkms);
     }
+    // แสดงเนื้อหา
+    public function showcontent($id)
+    {
+        // return Postkm::all();
+        $postkms = Postkm::find($id);
+        return response()->json($postkms);
+    }
+    // show หน้า KM
     public function showkmviews()
     {
         // return Postkm::all();
-        $postkms = Postkm::all();
+        $postkms = Postkm::orderBy('id', 'desc')->paginate(15);
         return response()->json($postkms);
+    }
+    // ค้นหาหน้า KM
+    public function search($keyword)
+    {
+        return Postkm::where(function ($query) use ($keyword) {
+            $query->where('titlename', 'like', '%' . $keyword . '%')
+                ->orWhere('creatorname', 'like', '%' . $keyword . '%')
+                ->orWhere('yearcreated', 'like', '%' . $keyword . '%');
+        })
+            ->orderBy('id', 'desc')
+            ->paginate(15);
+        // return Postkm::where('titlename', 'like', '%' . $keyword . '%')
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(15);
     }
 }
