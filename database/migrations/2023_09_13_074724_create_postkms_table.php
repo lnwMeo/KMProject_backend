@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('creatorname');
             $table->string('creatorimg')->nullable();
             $table->integer('yearcreated');
-            $table->longText('content');
+            $table->longText('content')->default('');
             $table->timestamps();
         });
     }

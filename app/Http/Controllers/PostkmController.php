@@ -30,14 +30,14 @@ class PostkmController extends Controller
         ]);
 
         // เพิ่มการตรวจสอบฟิลด์อื่น ๆ ตามความเหมาะสม
-
+        // $cleanedContent = $this->clean_quill_content($request->input('content'));
         // สร้างรายการ Postkm
         $post = Postkm::create([
             'titlename' => $request->input('titlename'),
             'creatorname' => $request->input('creatorname'),
             'yearcreated' => $request->input('yearcreated'),
+            // 'content' => $cleanedContent,
             'content' => $request->input('content'),
-            // 'creatorimg' => $request->input('content'),
             // เพิ่มฟิลด์อื่น ๆ ตามความเหมาะสม
         ]);
 
@@ -64,6 +64,12 @@ class PostkmController extends Controller
 
         return response($request, 201);
     }
+    // function clean_quill_content($content)
+    // {
+    //     $cleanedContent = strip_tags($content);
+    //     return $cleanedContent;
+    // }
+    
 
     public function update(Request $request, $id)
     {
