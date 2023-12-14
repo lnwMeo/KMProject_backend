@@ -53,12 +53,12 @@ class PostITController extends Controller
             'titlenameit' => 'required|string',
             'sourceit' => 'required|string',
             'contentit' => 'required',
-            'titleimgit' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'titleimgit' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $postits = PostIT::find($id);
         if($postits){
-            $postits = PostIT::create([
+            $postits ->update([
                 'titlenameit' => $request->input('titlenameit'),
                 'sourceit' => $request->input('sourceit'),
                 'contentit' => $request->input('contentit'),
