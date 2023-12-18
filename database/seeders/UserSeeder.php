@@ -29,6 +29,6 @@ class UserSeeder extends Seeder
         User::create($data);
 
         // เรียก UserFactory 
-        User::factory(19)->create();
+        User::factory(1)->create();
     }
 }
