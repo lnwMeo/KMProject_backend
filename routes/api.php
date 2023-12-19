@@ -8,8 +8,7 @@ use App\Http\Controllers\PostProjactController;
 use App\Http\Controllers\PostITController;
 use App\Http\Controllers\PageViewsController;
 
-// Route::post('login', [AuthController::class, 'login']);
-Route::get('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 Route::post('count-page', [PageViewsController::class, 'storeIpAddress']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
